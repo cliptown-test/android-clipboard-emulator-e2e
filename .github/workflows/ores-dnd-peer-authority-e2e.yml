@@ -64,7 +64,7 @@ jobs:
       - name: TypeSpec-only drift must stop promotion
         working-directory: .deps/ores-dnd
         run: |
-          case_dir="$(mktemp -d)"
+          case_dir="$(mktemp -d "$PWD/.peer-typespec-drift.XXXXXX")"
           cp -R contracts/. "$case_dir/"
           node - "$case_dir/main.tsp" <<'NODE'
           const fs = require('node:fs');
@@ -90,7 +90,7 @@ jobs:
       - name: Authored JSON Schema-only drift must stop promotion
         working-directory: .deps/ores-dnd
         run: |
-          case_dir="$(mktemp -d)"
+          case_dir="$(mktemp -d "$PWD/.peer-json-drift.XXXXXX")"
           cp -R contracts/. "$case_dir/"
           node - "$case_dir/authored.schema.json" <<'NODE'
           const fs = require('node:fs');
